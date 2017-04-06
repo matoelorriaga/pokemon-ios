@@ -13,16 +13,18 @@ import UIKit
 
 struct Main
 {
-  struct Something
-  {
-    struct Request
+    struct GetPokemonList
     {
+        struct Request
+        {
+        }
+        struct Response
+        {
+            var apiResourceList: APIResourceList?
+        }
+        struct ViewModel
+        {
+            var pokemonList: [Pokemon]
+        }
     }
-    struct Response
-    {
-    }
-    struct ViewModel
-    {
-    }
-  }
 }

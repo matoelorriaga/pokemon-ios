@@ -10,13 +10,18 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireObjectMapper
 
-class MainWorker
-{
-  // MARK: - Business Logic
-  
-  func doSomeWork()
-  {
-    // NOTE: Do the work
-  }
+class MainWorker {
+    
+    func getPokemonList(completionHandler: @escaping (APIResourceList?) -> Void) {
+        let url = "http://pokeapi.co/api/v2/pokemon/"
+        let parameters = ["limit": 150]
+        
+        Alamofire.request(url, parameters: parameters).responseObject { (response: DataResponse<APIResourceList>) in
+            completionHandler(response.result.value)
+        }
+    }
+    
 }

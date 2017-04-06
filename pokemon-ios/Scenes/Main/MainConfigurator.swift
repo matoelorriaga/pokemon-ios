@@ -11,46 +11,37 @@
 
 import UIKit
 
-// MARK: - Connect View, Interactor, and Presenter
-
 extension MainViewController: MainPresenterOutput
 {
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-  {
-    router.passDataToNextScene(segue: segue)
-  }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        router.passDataToNextScene(segue: segue)
+    }
 }
 
-extension MainInteractor: MainViewControllerOutput
-{
-}
+extension MainInteractor: MainViewControllerOutput {}
 
-extension MainPresenter: MainInteractorOutput
-{
-}
+extension MainPresenter: MainInteractorOutput {}
 
-class MainConfigurator
-{
-  // MARK: - Object lifecycle
-  
-  static let sharedInstance = MainConfigurator()
-  
-  private init() {}
-  
-  // MARK: - Configuration
-  
-  func configure(viewController: MainViewController)
-  {
-    let router = MainRouter()
-    router.viewController = viewController
+class MainConfigurator {
     
-    let presenter = MainPresenter()
-    presenter.output = viewController
+    static let sharedInstance = MainConfigurator()
     
-    let interactor = MainInteractor()
-    interactor.output = presenter
+    private init() {}
     
-    viewController.output = interactor
-    viewController.router = router
-  }
+    func configure(viewController: MainViewController)
+    {
+        let router = MainRouter()
+        router.viewController = viewController
+        
+        let presenter = MainPresenter()
+        presenter.output = viewController
+        
+        let interactor = MainInteractor()
+        interactor.output = presenter
+        
+        viewController.output = interactor
+        viewController.router = router
+    }
+    
 }

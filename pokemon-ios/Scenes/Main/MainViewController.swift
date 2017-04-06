@@ -13,51 +13,39 @@ import UIKit
 
 protocol MainViewControllerInput
 {
-  func displaySomething(viewModel: Main.Something.ViewModel)
+    func showPokemonList(viewModel: Main.GetPokemonList.ViewModel)
 }
 
 protocol MainViewControllerOutput
 {
-  func doSomething(request: Main.Something.Request)
+    func getPokemonList(request: Main.GetPokemonList.Request)
 }
 
-class MainViewController: UIViewController, MainViewControllerInput
-{
-  var output: MainViewControllerOutput!
-  var router: MainRouter!
-  
-  // MARK: - Object lifecycle
-  
-  override func awakeFromNib()
-  {
-    super.awakeFromNib()
-    MainConfigurator.sharedInstance.configure(viewController: self)
-  }
-  
-  // MARK: - View lifecycle
-  
-  override func viewDidLoad()
-  {
-    super.viewDidLoad()
-    doSomethingOnLoad()
-  }
-  
-  // MARK: - Event handling
-  
-  func doSomethingOnLoad()
-  {
-    // NOTE: Ask the Interactor to do some work
+class MainViewController: UIViewController, MainViewControllerInput {
     
-    let request = Main.Something.Request()
-    output.doSomething(request: request)
-  }
-  
-  // MARK: - Display logic
-  
-  func displaySomething(viewModel: Main.Something.ViewModel)
-  {
-    // NOTE: Display the result from the Presenter
+    var output: MainViewControllerOutput!
+    var router: MainRouter!
     
-    // nameTextField.text = viewModel.name
-  }
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        MainConfigurator.sharedInstance.configure(viewController: self)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        getPokemonList()
+    }
+    
+    func getPokemonList() {
+        let request = Main.GetPokemonList.Request()
+        output.getPokemonList(request: request)
+    }
+    
+    func showPokemonList(viewModel: Main.GetPokemonList.ViewModel) {
+        let pokemonList = viewModel.pokemonList
+        for pokemon in pokemonList {
+            print("\(pokemon.id!) - \(pokemon.name!)")
+        }
+    }
+    
 }

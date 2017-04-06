@@ -13,25 +13,32 @@ import UIKit
 
 protocol MainPresenterInput
 {
-  func presentSomething(response: Main.Something.Response)
+    func presentSomething(response: Main.GetPokemonList.Response)
 }
 
 protocol MainPresenterOutput: class
 {
-  func displaySomething(viewModel: Main.Something.ViewModel)
+    func showPokemonList(viewModel: Main.GetPokemonList.ViewModel)
 }
 
-class MainPresenter: MainPresenterInput
-{
-  weak var output: MainPresenterOutput!
-  
-  // MARK: - Presentation logic
-  
-  func presentSomething(response: Main.Something.Response)
-  {
-    // NOTE: Format the response from the Interactor and pass the result back to the View Controller
+class MainPresenter: MainPresenterInput {
     
-    let viewModel = Main.Something.ViewModel()
-    output.displaySomething(viewModel: viewModel)
-  }
+    weak var output: MainPresenterOutput!
+    
+    func presentSomething(response: Main.GetPokemonList.Response) {
+        if let results = response.apiResourceList?.results {
+            let pokemonList = results.map({
+                return Pokemon(JSON: [
+                    "id": Int($0.url!.components(separatedBy: "/")[6])!,
+                    "name": $0.name!
+                ])!
+            })
+            let viewModel = Main.GetPokemonList.ViewModel(pokemonList: pokemonList)
+            output.showPokemonList(viewModel: viewModel)
+        } else {
+            let viewModel = Main.GetPokemonList.ViewModel(pokemonList: [])
+            output.showPokemonList(viewModel: viewModel)
+        }
+    }
+    
 }
