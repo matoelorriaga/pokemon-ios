@@ -35,6 +35,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Pokémon" id="AEa-pT-r4B"/>
+                    <connections>
+                        <outlet property="tableView" destination="N5o-vG-AlL" id="5Uk-oY-kjp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

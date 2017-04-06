@@ -21,10 +21,16 @@ protocol MainViewControllerOutput
     func getPokemonList(request: Main.GetPokemonList.Request)
 }
 
-class MainViewController: UIViewController, MainViewControllerInput {
+class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MainViewControllerInput {
     
     var output: MainViewControllerOutput!
     var router: MainRouter!
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    let refreshControl = UIRefreshControl()
+    
+    var pokemonList = [Pokemon]()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,19 +39,64 @@ class MainViewController: UIViewController, MainViewControllerInput {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        initTableView()
+        initRefreshControl()
+        
         getPokemonList()
     }
+    
+    private func initTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
+    }
+    
+    private func initRefreshControl() {
+        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+        
+        refreshControl.beginRefreshing()
+        tableView.setContentOffset(CGPoint(x: 0, y: -refreshControl.frame.size.height), animated: true)
+    }
+    
+    // UITableViewDelegate
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {}
+    
+    // UITableViewDataSource
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return pokemonList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
+        cell.textLabel?.text = pokemonList[indexPath.row].name
+        return cell
+    }
+    
+    // events
+    
+    func refresh(_ refreshControl: UIRefreshControl) {
+        getPokemonList()
+    }
+    
+    // to interactor
     
     func getPokemonList() {
         let request = Main.GetPokemonList.Request()
         output.getPokemonList(request: request)
     }
     
+    // from presenter
+    
     func showPokemonList(viewModel: Main.GetPokemonList.ViewModel) {
-        let pokemonList = viewModel.pokemonList
-        for pokemon in pokemonList {
-            print("\(pokemon.id!) - \(pokemon.name!)")
-        }
+        self.pokemonList = viewModel.pokemonList
+        
+        tableView.reloadData()
+        refreshControl.endRefreshing()
     }
     
 }
