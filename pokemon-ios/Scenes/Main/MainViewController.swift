@@ -54,6 +54,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     private func initRefreshControl() {
+        refreshControl.tintColor = UIColor(hex: "#3367B0")
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         tableView.refreshControl = refreshControl
         
@@ -99,6 +100,15 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.pokemonList = viewModel.pokemonList
         
         tableView.reloadData()
+        stopRefreshing()
+    }
+    
+    private func stopRefreshing() {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d, h:mm a"
+        
+        let now = formatter.string(from: Date())
+        refreshControl.attributedTitle = NSAttributedString(string: "Last update: \(now)")
         refreshControl.endRefreshing()
     }
     
