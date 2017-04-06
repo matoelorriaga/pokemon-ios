@@ -28,6 +28,7 @@
 		906E922C1E9599EB00B95459 /* PokemonSprites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906E922B1E9599EB00B95459 /* PokemonSprites.swift */; };
 		906E922E1E959CA000B95459 /* NamedAPIResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906E922D1E959CA000B95459 /* NamedAPIResource.swift */; };
 		906E92301E959CF900B95459 /* APIResourceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906E922F1E959CF900B95459 /* APIResourceList.swift */; };
+		906E92331E95D8BD00B95459 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906E92321E95D8BD00B95459 /* UIColor+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		906E922B1E9599EB00B95459 /* PokemonSprites.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PokemonSprites.swift; path = Model/PokemonSprites.swift; sourceTree = "<group>"; };
 		906E922D1E959CA000B95459 /* NamedAPIResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NamedAPIResource.swift; path = Model/NamedAPIResource.swift; sourceTree = "<group>"; };
 		906E922F1E959CF900B95459 /* APIResourceList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIResourceList.swift; path = Model/APIResourceList.swift; sourceTree = "<group>"; };
+		906E92321E95D8BD00B95459 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor+Extensions.swift"; path = "Extensions/UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		CC8E02211297EEB8C2437DF1 /* Pods_pokemon_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pokemon_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8C1A0A95AFDB0940F58D119 /* Pods_pokemon_iosUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pokemon_iosUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -159,6 +161,7 @@
 		906E91E51E947CFC00B95459 /* pokemon-ios */ = {
 			isa = PBXGroup;
 			children = (
+				906E92311E95D89F00B95459 /* Extensions */,
 				906E92281E9486A200B95459 /* Model */,
 				906E92181E947EAE00B95459 /* Scenes */,
 				906E91E61E947CFC00B95459 /* AppDelegate.swift */,
@@ -220,6 +223,14 @@
 				906E922B1E9599EB00B95459 /* PokemonSprites.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		906E92311E95D89F00B95459 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				906E92321E95D8BD00B95459 /* UIColor+Extensions.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -517,6 +528,7 @@
 				906E92251E947ECC00B95459 /* MainViewController.swift in Sources */,
 				906E92231E947ECC00B95459 /* MainPresenter.swift in Sources */,
 				906E92261E947ECC00B95459 /* MainWorker.swift in Sources */,
+				906E92331E95D8BD00B95459 /* UIColor+Extensions.swift in Sources */,
 				906E91E71E947CFC00B95459 /* AppDelegate.swift in Sources */,
 				906E922C1E9599EB00B95459 /* PokemonSprites.swift in Sources */,
 			);
