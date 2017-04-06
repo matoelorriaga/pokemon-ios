@@ -11,12 +11,10 @@
 
 import UIKit
 
-class DetailsWorker
-{
-    // MARK: - Business Logic
+class DetailsWorker {
     
-    func doSomeWork()
-    {
-        // NOTE: Do the work
+    func doSomeWork() {
+        
     }
+    
 }

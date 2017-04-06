@@ -21,46 +21,48 @@ protocol DetailsViewControllerOutput
     func doSomething(request: Details.Something.Request)
 }
 
-class DetailsViewController: UIViewController, DetailsViewControllerInput
-{
+class DetailsViewController: UIViewController, DetailsViewControllerInput {
+    
     var output: DetailsViewControllerOutput!
     var router: DetailsRouter!
+    
+    @IBOutlet weak var frontImageView: UIImageView!
+    @IBOutlet weak var backImageView: UIImageView!
+    @IBOutlet weak var idLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var heightLabel: UILabel!
+    @IBOutlet weak var weightLabel: UILabel!
+    @IBOutlet weak var baseExperienceLabel: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet var pokemonViewCollection: [UIView]!
     
     var pokemonId: Int?
     var pokemonName: String?
     
-    // MARK: - Object lifecycle
-    
-    override func awakeFromNib()
-    {
+    override func awakeFromNib() {
         super.awakeFromNib()
         DetailsConfigurator.sharedInstance.configure(viewController: self)
     }
     
-    // MARK: - View lifecycle
-    
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
+        
+        showLoadingScreen()
+        
         doSomethingOnLoad()
     }
     
-    // MARK: - Event handling
+    private func showLoadingScreen() {
+        pokemonViewCollection.forEach { $0.isHidden = true}
+    }
     
-    func doSomethingOnLoad()
-    {
-        // NOTE: Ask the Interactor to do some work
-        
+    func doSomethingOnLoad() {
         let request = Details.Something.Request()
         output.doSomething(request: request)
     }
     
-    // MARK: - Display logic
-    
-    func displaySomething(viewModel: Details.Something.ViewModel)
-    {
-        // NOTE: Display the result from the Presenter
-        
+    func displaySomething(viewModel: Details.Something.ViewModel) {
         // nameTextField.text = viewModel.name
     }
+    
 }

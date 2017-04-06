@@ -16,16 +16,11 @@ protocol DetailsRouterInput
     func navigateToSomewhere()
 }
 
-class DetailsRouter: DetailsRouterInput
-{
+class DetailsRouter: DetailsRouterInput {
+    
     weak var viewController: DetailsViewController!
     
-    // MARK: - Navigation
-    
-    func navigateToSomewhere()
-    {
-        // NOTE: Teach the router how to navigate to another scene. Some examples follow:
-        
+    func navigateToSomewhere() {
         // 1. Trigger a storyboard segue
         // viewController.performSegueWithIdentifier("ShowSomewhereScene", sender: nil)
         
@@ -41,22 +36,15 @@ class DetailsRouter: DetailsRouterInput
         // viewController.navigationController?.pushViewController(someWhereViewController, animated: true)
     }
     
-    // MARK: - Communication
-    
-    func passDataToNextScene(segue: UIStoryboardSegue)
-    {
-        // NOTE: Teach the router which scenes it can communicate with
-        
+    func passDataToNextScene(segue: UIStoryboardSegue) {
         if segue.identifier == "ShowSomewhereScene" {
             passDataToSomewhereScene(segue: segue)
         }
     }
     
-    func passDataToSomewhereScene(segue: UIStoryboardSegue)
-    {
-        // NOTE: Teach the router how to pass data to the next scene
-        
+    func passDataToSomewhereScene(segue: UIStoryboardSegue) {
         // let someWhereViewController = segue.destinationViewController as! SomeWhereViewController
         // someWhereViewController.output.name = viewController.output.name
     }
+    
 }

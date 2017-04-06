@@ -21,23 +21,17 @@ protocol DetailsInteractorOutput
     func presentSomething(response: Details.Something.Response)
 }
 
-class DetailsInteractor: DetailsInteractorInput
-{
+class DetailsInteractor: DetailsInteractorInput {
+    
     var output: DetailsInteractorOutput!
     var worker: DetailsWorker!
     
-    // MARK: - Business logic
-    
-    func doSomething(request: Details.Something.Request)
-    {
-        // NOTE: Create some Worker to do the work
-        
+    func doSomething(request: Details.Something.Request) {
         worker = DetailsWorker()
         worker.doSomeWork()
-        
-        // NOTE: Pass the result to the Presenter
         
         let response = Details.Something.Response()
         output.presentSomething(response: response)
     }
+    
 }

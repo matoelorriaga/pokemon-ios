@@ -21,17 +21,13 @@ protocol DetailsPresenterOutput: class
     func displaySomething(viewModel: Details.Something.ViewModel)
 }
 
-class DetailsPresenter: DetailsPresenterInput
-{
+class DetailsPresenter: DetailsPresenterInput {
+    
     weak var output: DetailsPresenterOutput!
     
-    // MARK: - Presentation logic
-    
-    func presentSomething(response: Details.Something.Response)
-    {
-        // NOTE: Format the response from the Interactor and pass the result back to the View Controller
-        
+    func presentSomething(response: Details.Something.Response) {
         let viewModel = Details.Something.ViewModel()
         output.displaySomething(viewModel: viewModel)
     }
+    
 }

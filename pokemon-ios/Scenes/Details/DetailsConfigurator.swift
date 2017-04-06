@@ -11,8 +11,6 @@
 
 import UIKit
 
-// MARK: - Connect View, Interactor, and Presenter
-
 extension DetailsViewController: DetailsPresenterOutput
 {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
@@ -21,23 +19,15 @@ extension DetailsViewController: DetailsPresenterOutput
     }
 }
 
-extension DetailsInteractor: DetailsViewControllerOutput
-{
-}
+extension DetailsInteractor: DetailsViewControllerOutput {}
 
-extension DetailsPresenter: DetailsInteractorOutput
-{
-}
+extension DetailsPresenter: DetailsInteractorOutput {}
 
-class DetailsConfigurator
-{
-    // MARK: - Object lifecycle
+class DetailsConfigurator {
     
     static let sharedInstance = DetailsConfigurator()
     
     private init() {}
-    
-    // MARK: - Configuration
     
     func configure(viewController: DetailsViewController)
     {
@@ -53,4 +43,5 @@ class DetailsConfigurator
         viewController.output = interactor
         viewController.router = router
     }
+    
 }
