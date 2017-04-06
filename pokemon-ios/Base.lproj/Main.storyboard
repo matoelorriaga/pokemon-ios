@@ -37,11 +37,30 @@
                     <navigationItem key="navigationItem" title="Pokémon" id="AEa-pT-r4B"/>
                     <connections>
                         <outlet property="tableView" destination="N5o-vG-AlL" id="5Uk-oY-kjp"/>
+                        <segue destination="9BM-43-fTI" kind="show" identifier="FromMainToDetailsSegue" id="xsF-gI-tf1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1102" y="750"/>
+            <point key="canvasLocation" x="1093" y="749"/>
+        </scene>
+        <!--Details View Controller-->
+        <scene sceneID="Mlw-n0-hxa">
+            <objects>
+                <viewController id="9BM-43-fTI" customClass="DetailsViewController" customModule="pokemon_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="X3z-2z-U8J"/>
+                        <viewControllerLayoutGuide type="bottom" id="puJ-Bz-xvW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4eG-ka-FTE">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3CY-s3-Vjn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1851" y="749"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="vXy-98-o51">
@@ -51,6 +70,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="3H5-em-7Zw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" red="0.62352941176470589" green="0.12156862745098039" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
