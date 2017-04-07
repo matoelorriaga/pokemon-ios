@@ -11,20 +11,20 @@
 
 import UIKit
 
-struct Main
-{
-    struct GetPokemonList
-    {
-        struct Request
-        {
-        }
-        struct Response
-        {
+struct Main {
+    
+    struct GetPokemonList {
+        
+        struct Request {}
+        
+        struct Response {
             var apiResourceList: APIResourceList?
         }
-        struct ViewModel
-        {
+        
+        struct ViewModel {
             var pokemonList: [Pokemon]
         }
+        
     }
+    
 }

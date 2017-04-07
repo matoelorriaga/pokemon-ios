@@ -11,14 +11,15 @@
 
 import UIKit
 
-protocol DetailsRouterInput
-{
+protocol DetailsRouterInput {
     func navigateToSomewhere()
 }
 
 class DetailsRouter: DetailsRouterInput {
     
     weak var viewController: DetailsViewController!
+    
+    // navigation
     
     func navigateToSomewhere() {
         // 1. Trigger a storyboard segue
@@ -35,6 +36,8 @@ class DetailsRouter: DetailsRouterInput {
         // let someWhereViewController = storyboard.instantiateInitialViewController() as! SomeWhereViewController
         // viewController.navigationController?.pushViewController(someWhereViewController, animated: true)
     }
+    
+    // communication
     
     func passDataToNextScene(segue: UIStoryboardSegue) {
         if segue.identifier == "ShowSomewhereScene" {

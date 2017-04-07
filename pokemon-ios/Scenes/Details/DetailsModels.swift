@@ -11,21 +11,22 @@
 
 import UIKit
 
-struct Details
-{
-    struct GetPokemonDetails
-    {
-        struct Request
-        {
+struct Details {
+    
+    struct GetPokemonDetails {
+        
+        struct Request {
             var id: Int
         }
-        struct Response
-        {
+        
+        struct Response {
             var pokemon: Pokemon?
         }
-        struct ViewModel
-        {
+        
+        struct ViewModel {
             var pokemon: Pokemon?
         }
+        
     }
+    
 }

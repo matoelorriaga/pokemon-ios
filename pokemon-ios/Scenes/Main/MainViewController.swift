@@ -11,13 +11,11 @@
 
 import UIKit
 
-protocol MainViewControllerInput
-{
+protocol MainViewControllerInput {
     func displayGetPokemonList(viewModel: Main.GetPokemonList.ViewModel)
 }
 
-protocol MainViewControllerOutput
-{
+protocol MainViewControllerOutput {
     func doGetPokemonList(request: Main.GetPokemonList.Request)
 }
 

@@ -12,13 +12,11 @@
 import UIKit
 import AlamofireImage
 
-protocol DetailsViewControllerInput
-{
+protocol DetailsViewControllerInput {
     func displayGetPokemonDetails(viewModel: Details.GetPokemonDetails.ViewModel)
 }
 
-protocol DetailsViewControllerOutput
-{
+protocol DetailsViewControllerOutput {
     func doGetPokemonDetails(request: Details.GetPokemonDetails.Request)
 }
 

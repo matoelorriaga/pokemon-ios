@@ -11,12 +11,12 @@
 
 import UIKit
 
-extension MainViewController: MainPresenterOutput
-{
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-    {
+extension MainViewController: MainPresenterOutput {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         router.passDataToNextScene(segue: segue)
     }
+    
 }
 
 extension MainInteractor: MainViewControllerOutput {}
@@ -29,8 +29,7 @@ class MainConfigurator {
     
     private init() {}
     
-    func configure(viewController: MainViewController)
-    {
+    func configure(viewController: MainViewController) {
         let router = MainRouter()
         router.viewController = viewController
         

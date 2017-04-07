@@ -11,13 +11,11 @@
 
 import UIKit
 
-protocol DetailsPresenterInput
-{
+protocol DetailsPresenterInput {
     func presentGetPokemonDetails(response: Details.GetPokemonDetails.Response)
 }
 
-protocol DetailsPresenterOutput: class
-{
+protocol DetailsPresenterOutput: class {
     func displayGetPokemonDetails(viewModel: Details.GetPokemonDetails.ViewModel)
 }
 

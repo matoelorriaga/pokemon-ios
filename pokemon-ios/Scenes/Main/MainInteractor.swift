@@ -11,13 +11,11 @@
 
 import UIKit
 
-protocol MainInteractorInput
-{
+protocol MainInteractorInput {
     func doGetPokemonList(request: Main.GetPokemonList.Request)
 }
 
-protocol MainInteractorOutput
-{
+protocol MainInteractorOutput {
     func presentGetPokemonList(response: Main.GetPokemonList.Response)
 }
 

@@ -11,8 +11,7 @@
 
 import UIKit
 
-protocol MainRouterInput
-{
+protocol MainRouterInput {
     func navigateToDetailsScene()
 }
 
@@ -20,13 +19,13 @@ class MainRouter: MainRouterInput {
     
     weak var viewController: MainViewController!
     
-    // MARK: - Navigation
+    // navigation
     
     func navigateToDetailsScene() {
         viewController.performSegue(withIdentifier: "FromMainToDetailsSegue", sender: nil)
     }
     
-    // MARK: - Communication
+    // communication
     
     func passDataToNextScene(segue: UIStoryboardSegue) {
         if segue.identifier == "FromMainToDetailsSegue" {
