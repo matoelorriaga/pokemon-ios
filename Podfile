@@ -7,6 +7,7 @@ target 'pokemon-ios' do
 
   # Pods for pokemon-ios
   pod 'Alamofire', '~> 4.4'
+  pod 'AlamofireImage', '~> 3.2'
   pod 'AlamofireObjectMapper', '~> 4.1'
   pod 'ObjectMapper', '~> 2.2'
 

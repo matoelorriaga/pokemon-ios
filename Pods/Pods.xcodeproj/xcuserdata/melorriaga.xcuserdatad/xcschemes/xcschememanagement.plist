@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>AlamofireImage.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>AlamofireObjectMapper.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -57,12 +62,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E23C707766C024D788C077481FD2E246</key>
+		<key>9EFE4C70245EE2857D336B8B9FA4E825</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>F779101142C5745CE6EB9F98B59883EA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FFE5FC3ECDCB321426259129637F493B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

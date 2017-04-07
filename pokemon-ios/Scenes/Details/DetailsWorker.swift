@@ -10,11 +10,17 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireObjectMapper
 
 class DetailsWorker {
     
-    func doSomeWork() {
+    func getPokemonDetails(id: Int, completionHandler: @escaping (Pokemon?) -> Void) {
+        let url = "http://pokeapi.co/api/v2/pokemon/\(id)/"
         
+        Alamofire.request(url).responseObject { (response: DataResponse<Pokemon>) in
+            completionHandler(response.result.value)
+        }
     }
     
 }

@@ -23,14 +23,14 @@ class PokemonSprites: Mappable {
     required init?(map: Map) {}
     
     func mapping(map: Map) {
-        frontDefault        <- map["frontDefault"]
-        frontShiny          <- map["frontShiny"]
-        frontFemale         <- map["frontFemale"]
-        frontShinyFemale    <- map["frontShinyFemale"]
-        backDefault         <- map["backDefault"]
-        backFemale          <- map["backFemale"]
-        backFemale          <- map["backFemale"]
-        backShinyFemale     <- map["backShinyFemale"]
+        frontDefault        <- map["front_default"]
+        frontShiny          <- map["front_shiny"]
+        frontFemale         <- map["front_female"]
+        frontShinyFemale    <- map["front_shiny_female"]
+        backDefault         <- map["back_default"]
+        backFemale          <- map["back_female"]
+        backFemale          <- map["back_female"]
+        backShinyFemale     <- map["back_shiny_female"]
     }
     
 }

@@ -13,19 +13,19 @@ import UIKit
 
 protocol MainPresenterInput
 {
-    func presentSomething(response: Main.GetPokemonList.Response)
+    func presentGetPokemonList(response: Main.GetPokemonList.Response)
 }
 
 protocol MainPresenterOutput: class
 {
-    func showPokemonList(viewModel: Main.GetPokemonList.ViewModel)
+    func displayGetPokemonList(viewModel: Main.GetPokemonList.ViewModel)
 }
 
 class MainPresenter: MainPresenterInput {
     
     weak var output: MainPresenterOutput!
     
-    func presentSomething(response: Main.GetPokemonList.Response) {
+    func presentGetPokemonList(response: Main.GetPokemonList.Response) {
         if let results = response.apiResourceList?.results {
             let pokemonList = results.map({
                 return Pokemon(JSON: [
@@ -34,10 +34,10 @@ class MainPresenter: MainPresenterInput {
                 ])!
             })
             let viewModel = Main.GetPokemonList.ViewModel(pokemonList: pokemonList)
-            output.showPokemonList(viewModel: viewModel)
+            output.displayGetPokemonList(viewModel: viewModel)
         } else {
             let viewModel = Main.GetPokemonList.ViewModel(pokemonList: [])
-            output.showPokemonList(viewModel: viewModel)
+            output.displayGetPokemonList(viewModel: viewModel)
         }
     }
     

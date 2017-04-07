@@ -13,21 +13,21 @@ import UIKit
 
 protocol DetailsPresenterInput
 {
-    func presentSomething(response: Details.Something.Response)
+    func presentGetPokemonDetails(response: Details.GetPokemonDetails.Response)
 }
 
 protocol DetailsPresenterOutput: class
 {
-    func displaySomething(viewModel: Details.Something.ViewModel)
+    func displayGetPokemonDetails(viewModel: Details.GetPokemonDetails.ViewModel)
 }
 
 class DetailsPresenter: DetailsPresenterInput {
     
     weak var output: DetailsPresenterOutput!
     
-    func presentSomething(response: Details.Something.Response) {
-        let viewModel = Details.Something.ViewModel()
-        output.displaySomething(viewModel: viewModel)
+    func presentGetPokemonDetails(response: Details.GetPokemonDetails.Response) {
+        let viewModel = Details.GetPokemonDetails.ViewModel(pokemon: response.pokemon)
+        output.displayGetPokemonDetails(viewModel: viewModel)
     }
     
 }

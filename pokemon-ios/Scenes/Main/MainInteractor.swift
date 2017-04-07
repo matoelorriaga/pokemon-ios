@@ -13,22 +13,22 @@ import UIKit
 
 protocol MainInteractorInput
 {
-    func getPokemonList(request: Main.GetPokemonList.Request)
+    func doGetPokemonList(request: Main.GetPokemonList.Request)
 }
 
 protocol MainInteractorOutput
 {
-    func presentSomething(response: Main.GetPokemonList.Response)
+    func presentGetPokemonList(response: Main.GetPokemonList.Response)
 }
 
 class MainInteractor: MainInteractorInput {
     
     var output: MainInteractorOutput!
     
-    func getPokemonList(request: Main.GetPokemonList.Request) {
+    func doGetPokemonList(request: Main.GetPokemonList.Request) {
         MainWorker().getPokemonList { apiResourceList in
             let response = Main.GetPokemonList.Response(apiResourceList: apiResourceList)
-            self.output.presentSomething(response: response)
+            self.output.presentGetPokemonList(response: response)
         }
     }
     

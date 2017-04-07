@@ -13,25 +13,23 @@ import UIKit
 
 protocol DetailsInteractorInput
 {
-    func doSomething(request: Details.Something.Request)
+    func doGetPokemonDetails(request: Details.GetPokemonDetails.Request)
 }
 
 protocol DetailsInteractorOutput
 {
-    func presentSomething(response: Details.Something.Response)
+    func presentGetPokemonDetails(response: Details.GetPokemonDetails.Response)
 }
 
 class DetailsInteractor: DetailsInteractorInput {
     
     var output: DetailsInteractorOutput!
-    var worker: DetailsWorker!
     
-    func doSomething(request: Details.Something.Request) {
-        worker = DetailsWorker()
-        worker.doSomeWork()
-        
-        let response = Details.Something.Response()
-        output.presentSomething(response: response)
+    func doGetPokemonDetails(request: Details.GetPokemonDetails.Request) {
+        DetailsWorker().getPokemonDetails(id: request.id) { pokemon in
+            let response = Details.GetPokemonDetails.Response(pokemon: pokemon)
+            self.output.presentGetPokemonDetails(response: response)
+        }
     }
     
 }

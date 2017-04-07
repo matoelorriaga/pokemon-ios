@@ -13,16 +13,19 @@ import UIKit
 
 struct Details
 {
-    struct Something
+    struct GetPokemonDetails
     {
         struct Request
         {
+            var id: Int
         }
         struct Response
         {
+            var pokemon: Pokemon?
         }
         struct ViewModel
         {
+            var pokemon: Pokemon?
         }
     }
 }

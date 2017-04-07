@@ -10,15 +10,16 @@
 //
 
 import UIKit
+import AlamofireImage
 
 protocol DetailsViewControllerInput
 {
-    func displaySomething(viewModel: Details.Something.ViewModel)
+    func displayGetPokemonDetails(viewModel: Details.GetPokemonDetails.ViewModel)
 }
 
 protocol DetailsViewControllerOutput
 {
-    func doSomething(request: Details.Something.Request)
+    func doGetPokemonDetails(request: Details.GetPokemonDetails.Request)
 }
 
 class DetailsViewController: UIViewController, DetailsViewControllerInput {
@@ -47,22 +48,37 @@ class DetailsViewController: UIViewController, DetailsViewControllerInput {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        showLoadingScreen()
+        initNavigationControllerTitle()
         
-        doSomethingOnLoad()
+        getPokemonDetails()
     }
     
-    private func showLoadingScreen() {
-        pokemonViewCollection.forEach { $0.isHidden = true}
+    private func initNavigationControllerTitle() {
+        title = "\(pokemonName!) (#\(pokemonId!))"
     }
     
-    func doSomethingOnLoad() {
-        let request = Details.Something.Request()
-        output.doSomething(request: request)
+    // to interactor
+    
+    func getPokemonDetails() {
+        let request = Details.GetPokemonDetails.Request(id: pokemonId!)
+        output.doGetPokemonDetails(request: request)
     }
     
-    func displaySomething(viewModel: Details.Something.ViewModel) {
-        // nameTextField.text = viewModel.name
+    // from presenter
+    
+    func displayGetPokemonDetails(viewModel: Details.GetPokemonDetails.ViewModel) {
+        if let pokemon = viewModel.pokemon {
+            frontImageView.af_setImage(withURL: URL(string: pokemon.sprites!.frontDefault!)!)
+            backImageView.af_setImage(withURL: URL(string: pokemon.sprites!.backDefault!)!)
+            idLabel.text = "id: \(pokemon.id!)"
+            nameLabel.text = "name: \(pokemon.name!)"
+            heightLabel.text = "height: \(pokemon.height!)"
+            weightLabel.text = "weight: \(pokemon.weight!)"
+            baseExperienceLabel.text = "base experience: \(pokemon.baseExperience!)"
+        }
+        pokemonViewCollection.forEach { $0.isHidden = false}
+        activityIndicator.isHidden = true
+        activityIndicator.stopAnimating()
     }
     
 }

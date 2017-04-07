@@ -36,6 +36,7 @@
 		906E92401E95E31E00B95459 /* DetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906E92391E95E31E00B95459 /* DetailsRouter.swift */; };
 		906E92411E95E31E00B95459 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906E923A1E95E31E00B95459 /* DetailsViewController.swift */; };
 		906E92421E95E31E00B95459 /* DetailsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906E923B1E95E31E00B95459 /* DetailsWorker.swift */; };
+		906E92441E971C4400B95459 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906E92431E971C4400B95459 /* UIViewController+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +96,7 @@
 		906E92391E95E31E00B95459 /* DetailsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailsRouter.swift; path = Scenes/Details/DetailsRouter.swift; sourceTree = "<group>"; };
 		906E923A1E95E31E00B95459 /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailsViewController.swift; path = Scenes/Details/DetailsViewController.swift; sourceTree = "<group>"; };
 		906E923B1E95E31E00B95459 /* DetailsWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailsWorker.swift; path = Scenes/Details/DetailsWorker.swift; sourceTree = "<group>"; };
+		906E92431E971C4400B95459 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIViewController+Extensions.swift"; path = "Extensions/UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		CC8E02211297EEB8C2437DF1 /* Pods_pokemon_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pokemon_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8C1A0A95AFDB0940F58D119 /* Pods_pokemon_iosUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pokemon_iosUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -244,6 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				906E92321E95D8BD00B95459 /* UIColor+Extensions.swift */,
+				906E92431E971C4400B95459 /* UIViewController+Extensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -552,6 +555,7 @@
 				906E923D1E95E31E00B95459 /* DetailsInteractor.swift in Sources */,
 				906E92421E95E31E00B95459 /* DetailsWorker.swift in Sources */,
 				906E92221E947ECC00B95459 /* MainModels.swift in Sources */,
+				906E92441E971C4400B95459 /* UIViewController+Extensions.swift in Sources */,
 				906E91EF1E947CFC00B95459 /* pokemon_ios.xcdatamodeld in Sources */,
 				906E922E1E959CA000B95459 /* NamedAPIResource.swift in Sources */,
 				906E923C1E95E31E00B95459 /* DetailsConfigurator.swift in Sources */,

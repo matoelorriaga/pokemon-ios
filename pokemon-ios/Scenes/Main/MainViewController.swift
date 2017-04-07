@@ -13,15 +13,15 @@ import UIKit
 
 protocol MainViewControllerInput
 {
-    func showPokemonList(viewModel: Main.GetPokemonList.ViewModel)
+    func displayGetPokemonList(viewModel: Main.GetPokemonList.ViewModel)
 }
 
 protocol MainViewControllerOutput
 {
-    func getPokemonList(request: Main.GetPokemonList.Request)
+    func doGetPokemonList(request: Main.GetPokemonList.Request)
 }
 
-class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MainViewControllerInput {
+class MainViewController: UIViewController, MainViewControllerInput {
     
     var output: MainViewControllerOutput!
     var router: MainRouter!
@@ -46,6 +46,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         getPokemonList()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        smoothlyDeselectRows(tableView: tableView)
+    }
+    
     private func initTableView() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -62,25 +68,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.setContentOffset(CGPoint(x: 0, y: -refreshControl.frame.size.height), animated: true)
     }
     
-    // UITableViewDelegate
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        router.navigateToDetailsScene()
-    }
-    
-    // UITableViewDataSource
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return pokemonList.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
-        cell.textLabel?.text = pokemonList[indexPath.row].name
-        return cell
-    }
-    
     // events
     
     func refresh(_ refreshControl: UIRefreshControl) {
@@ -91,12 +78,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func getPokemonList() {
         let request = Main.GetPokemonList.Request()
-        output.getPokemonList(request: request)
+        output.doGetPokemonList(request: request)
     }
     
     // from presenter
     
-    func showPokemonList(viewModel: Main.GetPokemonList.ViewModel) {
+    func displayGetPokemonList(viewModel: Main.GetPokemonList.ViewModel) {
         self.pokemonList = viewModel.pokemonList
         
         tableView.reloadData()
@@ -110,6 +97,28 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         let now = formatter.string(from: Date())
         refreshControl.attributedTitle = NSAttributedString(string: "Last update: \(now)")
         refreshControl.endRefreshing()
+    }
+    
+}
+
+extension MainViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        router.navigateToDetailsScene()
+    }
+    
+}
+
+extension MainViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return pokemonList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
+        cell.textLabel?.text = pokemonList[indexPath.row].name
+        return cell
     }
     
 }

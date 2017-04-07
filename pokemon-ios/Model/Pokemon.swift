@@ -25,7 +25,8 @@ class Pokemon: Mappable {
         name            <- map["name"]
         height          <- map["height"]
         weight          <- map["weight"]
-        baseExperience  <- map["baseExperience"]
+        sprites         <- map["sprites"]
+        baseExperience  <- map["base_experience"]
     }
     
 }
