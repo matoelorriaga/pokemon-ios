@@ -13,7 +13,7 @@
         <!--Pokémon-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="MainViewController" customModule="pokemon_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="MainViewController" customModule="pokemon_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -48,7 +48,7 @@
         <!--Details View Controller-->
         <scene sceneID="Mlw-n0-hxa">
             <objects>
-                <viewController id="9BM-43-fTI" customClass="DetailsViewController" customModule="pokemon_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailsViewController" id="9BM-43-fTI" customClass="DetailsViewController" customModule="pokemon_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="X3z-2z-U8J"/>
                         <viewControllerLayoutGuide type="bottom" id="puJ-Bz-xvW"/>

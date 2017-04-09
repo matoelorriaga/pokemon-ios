@@ -34,20 +34,10 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-pokemon-iosUITests.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>2F5622F3B18DF497981AB58C6D1FC72F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>5FCC1A43C8B30D04E510AACB549EE19D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -67,7 +57,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F779101142C5745CE6EB9F98B59883EA</key>
+		<key>ADBD32A23024ABDA4A6F217BD3068992</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -22,9 +22,10 @@ protocol MainInteractorOutput {
 class MainInteractor: MainInteractorInput {
     
     var output: MainInteractorOutput!
+    var worker = MainWorker()
     
     func doGetPokemonList(request: Main.GetPokemonList.Request) {
-        MainWorker().getPokemonList { apiResourceList in
+        worker.getPokemonList { apiResourceList in
             let response = Main.GetPokemonList.Response(apiResourceList: apiResourceList)
             self.output.presentGetPokemonList(response: response)
         }

@@ -22,9 +22,10 @@ protocol DetailsInteractorOutput {
 class DetailsInteractor: DetailsInteractorInput {
     
     var output: DetailsInteractorOutput!
+    var worker = DetailsWorker()
     
     func doGetPokemonDetails(request: Details.GetPokemonDetails.Request) {
-        DetailsWorker().getPokemonDetails(id: request.id) { pokemon in
+        worker.getPokemonDetails(id: request.id) { pokemon in
             let response = Details.GetPokemonDetails.Response(pokemon: pokemon)
             self.output.presentGetPokemonDetails(response: response)
         }

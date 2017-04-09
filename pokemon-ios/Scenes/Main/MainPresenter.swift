@@ -24,18 +24,21 @@ class MainPresenter: MainPresenterInput {
     weak var output: MainPresenterOutput!
     
     func presentGetPokemonList(response: Main.GetPokemonList.Response) {
-        if let results = response.apiResourceList?.results {
-            let pokemonList = results.map({
+        let pokemonList = getPokemonListFromApiResourceList(apiResourceList: response.apiResourceList)
+        let viewModel = Main.GetPokemonList.ViewModel(pokemonList: pokemonList)
+        output.displayGetPokemonList(viewModel: viewModel)
+    }
+    
+    private func getPokemonListFromApiResourceList(apiResourceList: APIResourceList?) -> [Pokemon] {
+        if let results = apiResourceList?.results {
+            return results.map({
                 return Pokemon(JSON: [
                     "id": Int($0.url!.components(separatedBy: "/")[6])!,
                     "name": $0.name!
                 ])!
             })
-            let viewModel = Main.GetPokemonList.ViewModel(pokemonList: pokemonList)
-            output.displayGetPokemonList(viewModel: viewModel)
         } else {
-            let viewModel = Main.GetPokemonList.ViewModel(pokemonList: [])
-            output.displayGetPokemonList(viewModel: viewModel)
+            return []
         }
     }
     

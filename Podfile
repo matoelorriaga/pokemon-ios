@@ -14,11 +14,7 @@ target 'pokemon-ios' do
   target 'pokemon-iosTests' do
     inherit! :search_paths
     # Pods for testing
+    pod 'ObjectMapper', '~> 2.2'
   end
-
-  target 'pokemon-iosUITests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
+  
 end
