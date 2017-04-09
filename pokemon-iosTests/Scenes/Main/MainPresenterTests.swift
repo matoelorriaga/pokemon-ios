@@ -14,11 +14,7 @@ import XCTest
 
 class MainPresenterTests: XCTestCase {
     
-    // MARK: - Subject under test
-    
     var sut: MainPresenter!
-    
-    // MARK: - Test lifecycle
     
     override func setUp() {
         super.setUp()
@@ -29,22 +25,82 @@ class MainPresenterTests: XCTestCase {
         super.tearDown()
     }
     
-    // MARK: - Test setup
+    // setup
     
     func setupMainPresenter() {
         sut = MainPresenter()
     }
     
-    // MARK: - Test doubles
+    // test doubles
     
-    // MARK: - Tests
+    class MainPresenterOutputSpy: MainPresenterOutput {
+        
+        var displayGetPokemonListCalled = false
+        var mainGetPokemonListViewModel: Main.GetPokemonList.ViewModel!
+        
+        func displayGetPokemonList(viewModel: Main.GetPokemonList.ViewModel) {
+            displayGetPokemonListCalled = true
+            mainGetPokemonListViewModel = viewModel
+        }
     
-    func testSomething() {
-        // Given
+    }
+    
+    // tests
+    
+    func testPresentGetPokemonList_shouldCallPresenter() {
+        // given
+        let mainPresenterOutputSpy = MainPresenterOutputSpy()
+        sut.output = mainPresenterOutputSpy
         
-        // When
+        // when
+        let response = Main.GetPokemonList.Response(apiResourceList: nil)
+        sut.presentGetPokemonList(response: response)
         
-        // Then
+        // then
+        XCTAssert(mainPresenterOutputSpy.displayGetPokemonListCalled)
+    }
+    
+    func testPresentGetPokemonList_shouldFormatResponseFromInteractor() {
+        // given
+        let mainPresenterOutputSpy = MainPresenterOutputSpy()
+        sut.output = mainPresenterOutputSpy
+        
+        let json = [
+            "results": [
+                [
+                    "url": "http://pokeapi.co/api/v2/pokemon/1/",
+                    "name": "bulbasaur"
+                ],
+                [
+                    "url": "http://pokeapi.co/api/v2/pokemon/2/",
+                    "name": "ivysaur"
+                ],
+                [
+                    "url": "http://pokeapi.co/api/v2/pokemon/3/",
+                    "name": "venusaur"
+                ]
+            ]
+        ]
+        let apiResourceList = APIResourceList(JSON: json)
+        
+        // when
+        let response = Main.GetPokemonList.Response(apiResourceList: apiResourceList)
+        sut.presentGetPokemonList(response: response)
+        
+        // then
+        let returnedPokemonList = mainPresenterOutputSpy.mainGetPokemonListViewModel.pokemonList
+        let expectedPokemonList = [
+            Pokemon(JSON: ["id": 1, "name": "bulbasaur"]),
+            Pokemon(JSON: ["id": 2, "name": "ivysaur"]),
+            Pokemon(JSON: ["id": 3, "name": "venusaur"])
+        ]
+        
+        XCTAssertEqual(returnedPokemonList[0].id, expectedPokemonList[0]?.id)
+        XCTAssertEqual(returnedPokemonList[0].name, expectedPokemonList[0]?.name)
+        XCTAssertEqual(returnedPokemonList[1].id, expectedPokemonList[1]?.id)
+        XCTAssertEqual(returnedPokemonList[1].name, expectedPokemonList[1]?.name)
+        XCTAssertEqual(returnedPokemonList[2].id, expectedPokemonList[2]?.id)
+        XCTAssertEqual(returnedPokemonList[2].name, expectedPokemonList[2]?.name)
     }
     
 }

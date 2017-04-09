@@ -14,11 +14,7 @@ import XCTest
 
 class MainInteractorTests: XCTestCase {
     
-    // MARK: - Subject under test
-    
     var sut: MainInteractor!
-    
-    // MARK: - Test lifecycle
     
     override func setUp() {
         super.setUp()
@@ -29,22 +25,52 @@ class MainInteractorTests: XCTestCase {
         super.tearDown()
     }
     
-    // MARK: - Test setup
+    // setup
     
     func setupMainInteractor() {
         sut = MainInteractor()
     }
     
-    // MARK: - Test doubles
+    // test doubles
     
-    // MARK: - Tests
+    class MainWorkerSpy: MainWorker {
+        
+        var getPokemonListCalled = false
+        
+        override func getPokemonList(completionHandler: @escaping (APIResourceList?) -> Void) {
+            getPokemonListCalled = true
+            completionHandler(nil)
+        }
+        
+    }
     
-    func testSomething() {
-        // Given
+    class MainInteractorOutputSpy: MainInteractorOutput {
         
-        // When
+        var presentGetPokemonListCalled = false
         
-        // Then
+        func presentGetPokemonList(response: Main.GetPokemonList.Response) {
+            presentGetPokemonListCalled = true
+        }
+        
+    }
+    
+    // tests
+    
+    func testDoGetPokemonList_shouldCallWorkerAndPresenter() {
+        // given
+        let mainWorkerSpy = MainWorkerSpy()
+        sut.worker = mainWorkerSpy
+        
+        let mainInteractorOutputSpy = MainInteractorOutputSpy()
+        sut.output = mainInteractorOutputSpy
+        
+        // when
+        let request = Main.GetPokemonList.Request()
+        sut.doGetPokemonList(request: request)
+        
+        // then
+        XCTAssert(mainWorkerSpy.getPokemonListCalled)
+        XCTAssert(mainInteractorOutputSpy.presentGetPokemonListCalled)
     }
     
 }
