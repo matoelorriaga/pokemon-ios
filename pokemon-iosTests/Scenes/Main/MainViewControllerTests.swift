@@ -43,14 +43,121 @@ class MainViewControllerTests: XCTestCase {
     
     // test doubles
     
+    class MainViewControllerOutputSpy: MainViewControllerOutput {
+        
+        var doGetPokemonListCalled = false
+        
+        func doGetPokemonList(request: Main.GetPokemonList.Request) {
+            doGetPokemonListCalled = true
+        }
+    
+    }
+    
+    class UITableViewSpy: UITableView {
+        
+        var reloadDataCalled = false
+        
+        override func reloadData() {
+            reloadDataCalled = true
+        }
+        
+    }
+    
+    class MainRouterSpy: MainRouter {
+        
+        var navigateToDetailsSceneCalled = false
+        
+        override func navigateToDetailsScene() {
+            navigateToDetailsSceneCalled = true
+        }
+        
+    }
+    
     // tests
     
-    func testSomething() {
+    func testWhenLoadedShouldCallInteractor() {
         // given
+        let mainViewControllerOutputSpy = MainViewControllerOutputSpy()
+        sut.output = mainViewControllerOutputSpy
         
         // when
+        loadView()
         
         // then
+        XCTAssert(mainViewControllerOutputSpy.doGetPokemonListCalled)
+    }
+    
+    func testWhenPullToRefreshShouldCallInteractor() {
+        let mainViewControllerOutputSpy = MainViewControllerOutputSpy()
+        sut.output = mainViewControllerOutputSpy
+        
+        // when
+        sut.refresh(sut.refreshControl)
+        
+        // then
+        XCTAssert(mainViewControllerOutputSpy.doGetPokemonListCalled)
+    }
+    
+    func testShouldDisplayPokemonList() {
+        // given
+        let tableViewSpy = UITableViewSpy()
+        sut.tableView = tableViewSpy
+        
+        // when
+        let viewModel = Main.GetPokemonList.ViewModel(pokemonList: [])
+        sut.displayGetPokemonList(viewModel: viewModel)
+        
+        // then
+        XCTAssert(tableViewSpy.reloadDataCalled)
+    }
+    
+    func testSelectTableViewRowShouldNavigateToDetailsScene() {
+        // given
+        let mainRouterSpy = MainRouterSpy()
+        sut.router = mainRouterSpy
+        
+        // when
+        loadView()
+        let indexPath = IndexPath(row: 0, section: 0)
+        sut.tableView(sut.tableView, didSelectRowAt: indexPath)
+        
+        // then
+        XCTAssert(mainRouterSpy.navigateToDetailsSceneCalled)
+    }
+    
+    func testNumberOfRowsInTableViewShouldBeEqualToPokemonListCount() {
+        // given
+        let pokemonList = [
+            Pokemon(JSON: ["id": 1, "name": "bulbasaur"])!,
+            Pokemon(JSON: ["id": 2, "name": "ivysaur"])!,
+            Pokemon(JSON: ["id": 3, "name": "venusaur"])!
+        ]
+        sut.pokemonList = pokemonList
+        
+        // when
+        loadView()
+        let numberOfRowsInSection = sut.tableView(sut.tableView, numberOfRowsInSection: 0)
+        
+        // then
+        XCTAssertEqual(numberOfRowsInSection, pokemonList.count)
+    }
+    
+    func testShouldConfigureTableViewCells() {
+        // given
+        let pokemonList = [
+            Pokemon(JSON: ["id": 1, "name": "bulbasaur"])!,
+            Pokemon(JSON: ["id": 2, "name": "ivysaur"])!,
+            Pokemon(JSON: ["id": 3, "name": "venusaur"])!
+        ]
+        sut.pokemonList = pokemonList
+        
+        // when
+        loadView()
+        let indexPath = IndexPath(row: 0, section: 0)
+        let cell = sut.tableView(sut.tableView, cellForRowAt: indexPath)
+        
+        // then
+        XCTAssertEqual(cell.textLabel?.text, "bulbasaur")
     }
     
 }

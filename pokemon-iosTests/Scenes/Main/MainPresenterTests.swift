@@ -47,7 +47,7 @@ class MainPresenterTests: XCTestCase {
     
     // tests
     
-    func testSutShouldCallPresenter() {
+    func testShouldCallPresenter() {
         // given
         let mainPresenterOutputSpy = MainPresenterOutputSpy()
         sut.output = mainPresenterOutputSpy
@@ -60,7 +60,7 @@ class MainPresenterTests: XCTestCase {
         XCTAssert(mainPresenterOutputSpy.displayGetPokemonListCalled)
     }
     
-    func testSutShouldFormatResponseFromInteractor() {
+    func testShouldFormatResponseFromInteractor() {
         // given
         let mainPresenterOutputSpy = MainPresenterOutputSpy()
         sut.output = mainPresenterOutputSpy
@@ -90,17 +90,17 @@ class MainPresenterTests: XCTestCase {
         // then
         let returnedPokemonList = mainPresenterOutputSpy.mainGetPokemonListViewModel.pokemonList
         let expectedPokemonList = [
-            Pokemon(JSON: ["id": 1, "name": "bulbasaur"]),
-            Pokemon(JSON: ["id": 2, "name": "ivysaur"]),
-            Pokemon(JSON: ["id": 3, "name": "venusaur"])
+            Pokemon(JSON: ["id": 1, "name": "bulbasaur"])!,
+            Pokemon(JSON: ["id": 2, "name": "ivysaur"])!,
+            Pokemon(JSON: ["id": 3, "name": "venusaur"])!
         ]
         
-        XCTAssertEqual(returnedPokemonList[0].id, expectedPokemonList[0]?.id)
-        XCTAssertEqual(returnedPokemonList[0].name, expectedPokemonList[0]?.name)
-        XCTAssertEqual(returnedPokemonList[1].id, expectedPokemonList[1]?.id)
-        XCTAssertEqual(returnedPokemonList[1].name, expectedPokemonList[1]?.name)
-        XCTAssertEqual(returnedPokemonList[2].id, expectedPokemonList[2]?.id)
-        XCTAssertEqual(returnedPokemonList[2].name, expectedPokemonList[2]?.name)
+        XCTAssertEqual(returnedPokemonList[0].id, expectedPokemonList[0].id)
+        XCTAssertEqual(returnedPokemonList[0].name, expectedPokemonList[0].name)
+        XCTAssertEqual(returnedPokemonList[1].id, expectedPokemonList[1].id)
+        XCTAssertEqual(returnedPokemonList[1].name, expectedPokemonList[1].name)
+        XCTAssertEqual(returnedPokemonList[2].id, expectedPokemonList[2].id)
+        XCTAssertEqual(returnedPokemonList[2].name, expectedPokemonList[2].name)
     }
     
 }

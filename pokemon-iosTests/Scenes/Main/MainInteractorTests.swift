@@ -67,7 +67,7 @@ class MainInteractorTests: XCTestCase {
     
     // tests
     
-    func testSutShouldCallWorkerAndPresenter() {
+    func testShouldCallWorkerAndPresenter() {
         // given
         let mainWorkerSpy = MainWorkerSpy(mainStore: MainStoreProtocolSpy())
         sut.worker = mainWorkerSpy

@@ -33,7 +33,7 @@ class MainRouter: MainRouterInput {
         }
     }
     
-    func passDataToFromMainToSegueScene(segue: UIStoryboardSegue) {
+    private func passDataToFromMainToSegueScene(segue: UIStoryboardSegue) {
         if let selectedIndexPath = viewController.tableView.indexPathForSelectedRow {
             let pokemon = viewController.pokemonList[selectedIndexPath.row]
             let detailsViewController = segue.destination as! DetailsViewController

@@ -46,7 +46,7 @@ class MainWorkerTests: XCTestCase {
     
     // tests
     
-    func testSutShouldCallStore() {
+    func testShouldCallStore() {
         // given
         let mainStoreProtocolSpy = MainStoreProtocolSpy()
         sut.mainStore = mainStoreProtocolSpy

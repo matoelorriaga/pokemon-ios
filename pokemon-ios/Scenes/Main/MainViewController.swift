@@ -74,7 +74,7 @@ class MainViewController: UIViewController, MainViewControllerInput {
     
     // to interactor
     
-    func getPokemonList() {
+    private func getPokemonList() {
         let request = Main.GetPokemonList.Request()
         output.doGetPokemonList(request: request)
     }
