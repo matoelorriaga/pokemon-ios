@@ -66,15 +66,19 @@ class DetailsViewController: UIViewController, DetailsViewControllerInput {
     
     func displayGetPokemonDetails(viewModel: Details.GetPokemonDetails.ViewModel) {
         if let pokemon = viewModel.pokemon {
-            frontImageView.af_setImage(withURL: URL(string: pokemon.sprites!.frontDefault!)!)
-            backImageView.af_setImage(withURL: URL(string: pokemon.sprites!.backDefault!)!)
+            if let frontDefault = pokemon.sprites?.frontDefault {
+                frontImageView.af_setImage(withURL: URL(string: frontDefault)!)
+            }
+            if let backDefault = pokemon.sprites?.backDefault {
+                backImageView.af_setImage(withURL: URL(string: backDefault)!)
+            }
             idLabel.text = "id: \(pokemon.id!)"
             nameLabel.text = "name: \(pokemon.name!)"
             heightLabel.text = "height: \(pokemon.height!)"
             weightLabel.text = "weight: \(pokemon.weight!)"
             baseExperienceLabel.text = "base experience: \(pokemon.baseExperience!)"
+            pokemonViewCollection.forEach { $0.isHidden = false}
         }
-        pokemonViewCollection.forEach { $0.isHidden = false}
         activityIndicator.isHidden = true
         activityIndicator.stopAnimating()
     }

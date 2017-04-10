@@ -16,6 +16,7 @@ class MainAPIStore: MainStore {
         let url = "http://pokeapi.co/api/v2/pokemon/"
         let parameters = ["limit": 150]
         
+        debugPrint(url, parameters)
         Alamofire.request(url, parameters: parameters).responseObject { (response: DataResponse<APIResourceList>) in
             completionHandler(response.result.value)
         }

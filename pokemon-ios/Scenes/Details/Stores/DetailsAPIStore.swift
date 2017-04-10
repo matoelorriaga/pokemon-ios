@@ -15,6 +15,7 @@ class DetailsAPIStore: DetailsStore {
     func getPokemonDetails(id: Int, completionHandler: @escaping (Pokemon?) -> Void) {
         let url = "http://pokeapi.co/api/v2/pokemon/\(id)/"
         
+        debugPrint(url)
         Alamofire.request(url).responseObject { (response: DataResponse<Pokemon>) in
             completionHandler(response.result.value)
         }

@@ -34,6 +34,9 @@ class DetailsViewControllerTests: XCTestCase {
         let bundle = Bundle.main
         let storyboard = UIStoryboard(name: "Main", bundle: bundle)
         sut = storyboard.instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
+        
+        sut.pokemonId = 1
+        sut.pokemonName = "bulbasaur"
     }
     
     func loadView() {
@@ -43,14 +46,68 @@ class DetailsViewControllerTests: XCTestCase {
     
     // test doubles
     
+    class DetailsViewControllerOutputSpy: DetailsViewControllerOutput {
+        
+        var doGetPokemonDetailsCalled = false
+        var request: Details.GetPokemonDetails.Request!
+        
+        func doGetPokemonDetails(request: Details.GetPokemonDetails.Request) {
+            doGetPokemonDetailsCalled = true
+            self.request = request
+        }
+    
+    }
+    
     // tests
     
-    func testSomething() {
+    func testWhenLoadedShouldCallInteractor() {
         // given
+        let detailsViewControllerOutputSpy = DetailsViewControllerOutputSpy()
+        sut.output = detailsViewControllerOutputSpy
         
         // when
+        loadView()
         
         // then
+        XCTAssert(detailsViewControllerOutputSpy.doGetPokemonDetailsCalled)
+    }
+    
+    func testWhenLoadedShouldUpdateNavigationBarTitle() {
+        // given
+
+        // when
+        loadView()
+        
+        // then
+        XCTAssertEqual(sut.title, "bulbasaur (#1)")
+    }
+    
+    func testShouldDisplayPokemonDetails() {
+        // given
+        let pokemon = Pokemon(JSON: [
+            "id": 1,
+            "name": "bulbasaur",
+            "height": 7,
+            "weight": 69,
+            "base_experience": 64
+        ])!
+        let viewModel = Details.GetPokemonDetails.ViewModel(pokemon: pokemon)
+        
+        // when
+        loadView()
+        sut.displayGetPokemonDetails(viewModel: viewModel)
+        
+        // then
+        XCTAssertEqual(sut.idLabel.text, "id: \(pokemon.id!)")
+        XCTAssertEqual(sut.nameLabel.text, "name: \(pokemon.name!)")
+        XCTAssertEqual(sut.heightLabel.text, "height: \(pokemon.height!)")
+        XCTAssertEqual(sut.weightLabel.text, "weight: \(pokemon.weight!)")
+        XCTAssertEqual(sut.baseExperienceLabel.text, "base experience: \(pokemon.baseExperience!)")
+        for view in sut.pokemonViewCollection {
+            XCTAssert(!view.isHidden)
+        }
+        XCTAssert(sut.activityIndicator.isHidden)
+        XCTAssert(!sut.activityIndicator.isAnimating)
     }
     
 }
