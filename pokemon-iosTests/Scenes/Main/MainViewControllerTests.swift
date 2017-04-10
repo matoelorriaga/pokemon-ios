@@ -14,12 +14,8 @@ import XCTest
 
 class MainViewControllerTests: XCTestCase {
     
-    // MARK: - Subject under test
-    
     var sut: MainViewController!
     var window: UIWindow!
-    
-    // MARK: - Test lifecycle
     
     override func setUp() {
         super.setUp()
@@ -32,7 +28,7 @@ class MainViewControllerTests: XCTestCase {
         super.tearDown()
     }
     
-    // MARK: - Test setup
+    // setup
     
     func setupMainViewController() {
         let bundle = Bundle.main
@@ -45,16 +41,16 @@ class MainViewControllerTests: XCTestCase {
         RunLoop.current.run(until: Date())
     }
     
-    // MARK: - Test doubles
+    // test doubles
     
-    // MARK: - Tests
+    // tests
     
     func testSomething() {
-        // Given
+        // given
         
-        // When
+        // when
         
-        // Then
+        // then
     }
     
 }

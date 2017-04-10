@@ -9,17 +9,25 @@
 //  clean architecture to your iOS and Mac projects, see http://clean-swift.com
 //
 
-import UIKit
+import Foundation
 import Alamofire
 import AlamofireObjectMapper
 
+protocol DetailsStoreProtocol {
+    func getPokemonDetails(id: Int, completionHandler: @escaping (Pokemon?) -> Void)
+}
+
 class DetailsWorker {
     
+    var detailsStore: DetailsStoreProtocol
+    
+    init(detailsStore: DetailsStoreProtocol) {
+        self.detailsStore = detailsStore
+    }
+    
     func getPokemonDetails(id: Int, completionHandler: @escaping (Pokemon?) -> Void) {
-        let url = "http://pokeapi.co/api/v2/pokemon/\(id)/"
-        
-        Alamofire.request(url).responseObject { (response: DataResponse<Pokemon>) in
-            completionHandler(response.result.value)
+        detailsStore.getPokemonDetails(id: id) { pokemon in
+            completionHandler(pokemon)
         }
     }
     

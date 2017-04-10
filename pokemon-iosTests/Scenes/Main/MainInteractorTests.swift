@@ -33,6 +33,17 @@ class MainInteractorTests: XCTestCase {
     
     // test doubles
     
+    class MainStoreProtocolSpy: MainStoreProtocol {
+        
+        var getPokemonListCalled = false
+        
+        func getPokemonList(completionHandler: @escaping (APIResourceList?) -> Void) {
+            getPokemonListCalled = true
+            completionHandler(nil)
+        }
+        
+    }
+    
     class MainWorkerSpy: MainWorker {
         
         var getPokemonListCalled = false
@@ -56,9 +67,9 @@ class MainInteractorTests: XCTestCase {
     
     // tests
     
-    func testDoGetPokemonList_shouldCallWorkerAndPresenter() {
+    func testSutShouldCallWorkerAndPresenter() {
         // given
-        let mainWorkerSpy = MainWorkerSpy()
+        let mainWorkerSpy = MainWorkerSpy(mainStore: MainStoreProtocolSpy())
         sut.worker = mainWorkerSpy
         
         let mainInteractorOutputSpy = MainInteractorOutputSpy()

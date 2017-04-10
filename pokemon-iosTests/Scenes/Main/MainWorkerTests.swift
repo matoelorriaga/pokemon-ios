@@ -14,11 +14,7 @@ import XCTest
 
 class MainWorkerTests: XCTestCase {
     
-    // MARK: - Subject under test
-    
     var sut: MainWorker!
-    
-    // MARK: - Test lifecycle
     
     override func setUp() {
         super.setUp()
@@ -29,22 +25,37 @@ class MainWorkerTests: XCTestCase {
         super.tearDown()
     }
     
-    // MARK: - Test setup
+    // setup
     
     func setupMainWorker() {
-        sut = MainWorker()
+        sut = MainWorker(mainStore: MainStoreProtocolSpy())
     }
     
-    // MARK: - Test doubles
+    // test doubles
     
-    // MARK: - Tests
+    class MainStoreProtocolSpy: MainStoreProtocol {
+        
+        var getPokemonListCalled = false
+        
+        func getPokemonList(completionHandler: @escaping (APIResourceList?) -> Void) {
+            getPokemonListCalled = true
+            completionHandler(nil)
+        }
+        
+    }
     
-    func testSomething() {
-        // Given
+    // tests
+    
+    func testSutShouldCallStore() {
+        // given
+        let mainStoreProtocolSpy = MainStoreProtocolSpy()
+        sut.mainStore = mainStoreProtocolSpy
         
-        // When
-        
-        // Then
+        // when
+        sut.getPokemonList { _ in }
+
+        // then
+        XCTAssert(mainStoreProtocolSpy.getPokemonListCalled)
     }
     
 }

@@ -9,7 +9,7 @@
 //  clean architecture to your iOS and Mac projects, see http://clean-swift.com
 //
 
-import UIKit
+import Foundation
 
 protocol MainInteractorInput {
     func doGetPokemonList(request: Main.GetPokemonList.Request)
@@ -22,7 +22,7 @@ protocol MainInteractorOutput {
 class MainInteractor: MainInteractorInput {
     
     var output: MainInteractorOutput!
-    var worker = MainWorker()
+    var worker = MainWorker(mainStore: MainAPIStore())
     
     func doGetPokemonList(request: Main.GetPokemonList.Request) {
         worker.getPokemonList { apiResourceList in

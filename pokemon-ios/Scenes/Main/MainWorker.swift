@@ -9,18 +9,23 @@
 //  clean architecture to your iOS and Mac projects, see http://clean-swift.com
 //
 
-import UIKit
-import Alamofire
-import AlamofireObjectMapper
+import Foundation
+
+protocol MainStoreProtocol {
+    func getPokemonList(completionHandler: @escaping (APIResourceList?) -> Void)
+}
 
 class MainWorker {
     
+    var mainStore: MainStoreProtocol
+    
+    init(mainStore: MainStoreProtocol) {
+        self.mainStore = mainStore
+    }
+    
     func getPokemonList(completionHandler: @escaping (APIResourceList?) -> Void) {
-        let url = "http://pokeapi.co/api/v2/pokemon/"
-        let parameters = ["limit": 150]
-        
-        Alamofire.request(url, parameters: parameters).responseObject { (response: DataResponse<APIResourceList>) in
-            completionHandler(response.result.value)
+        mainStore.getPokemonList { apiResourceList in
+            completionHandler(apiResourceList)
         }
     }
     

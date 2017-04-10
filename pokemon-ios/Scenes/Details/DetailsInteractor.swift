@@ -9,7 +9,7 @@
 //  clean architecture to your iOS and Mac projects, see http://clean-swift.com
 //
 
-import UIKit
+import Foundation
 
 protocol DetailsInteractorInput {
     func doGetPokemonDetails(request: Details.GetPokemonDetails.Request)
@@ -22,7 +22,7 @@ protocol DetailsInteractorOutput {
 class DetailsInteractor: DetailsInteractorInput {
     
     var output: DetailsInteractorOutput!
-    var worker = DetailsWorker()
+    var worker = DetailsWorker(detailsStore: DetailsAPIStore())
     
     func doGetPokemonDetails(request: Details.GetPokemonDetails.Request) {
         worker.getPokemonDetails(id: request.id) { pokemon in

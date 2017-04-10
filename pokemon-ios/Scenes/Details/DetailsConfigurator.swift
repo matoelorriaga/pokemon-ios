@@ -12,11 +12,9 @@
 import UIKit
 
 extension DetailsViewController: DetailsPresenterOutput {
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         router.passDataToNextScene(segue: segue)
     }
-    
 }
 
 extension DetailsInteractor: DetailsViewControllerOutput {}

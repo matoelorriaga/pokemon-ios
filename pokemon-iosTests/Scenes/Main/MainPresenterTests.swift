@@ -47,7 +47,7 @@ class MainPresenterTests: XCTestCase {
     
     // tests
     
-    func testPresentGetPokemonList_shouldCallPresenter() {
+    func testSutShouldCallPresenter() {
         // given
         let mainPresenterOutputSpy = MainPresenterOutputSpy()
         sut.output = mainPresenterOutputSpy
@@ -60,7 +60,7 @@ class MainPresenterTests: XCTestCase {
         XCTAssert(mainPresenterOutputSpy.displayGetPokemonListCalled)
     }
     
-    func testPresentGetPokemonList_shouldFormatResponseFromInteractor() {
+    func testSutShouldFormatResponseFromInteractor() {
         // given
         let mainPresenterOutputSpy = MainPresenterOutputSpy()
         sut.output = mainPresenterOutputSpy

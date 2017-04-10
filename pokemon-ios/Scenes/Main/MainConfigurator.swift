@@ -12,11 +12,9 @@
 import UIKit
 
 extension MainViewController: MainPresenterOutput {
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         router.passDataToNextScene(segue: segue)
     }
-    
 }
 
 extension MainInteractor: MainViewControllerOutput {}

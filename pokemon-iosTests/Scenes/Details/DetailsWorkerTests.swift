@@ -32,7 +32,7 @@ class DetailsWorkerTests: XCTestCase {
     // MARK: - Test setup
     
     func setupDetailsWorker() {
-        sut = DetailsWorker()
+//        sut = DetailsWorker()
     }
     
     // MARK: - Test doubles

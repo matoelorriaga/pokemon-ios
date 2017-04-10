@@ -40,9 +40,9 @@ class DetailsRouter: DetailsRouterInput {
     // communication
     
     func passDataToNextScene(segue: UIStoryboardSegue) {
-        if segue.identifier == "ShowSomewhereScene" {
-            passDataToSomewhereScene(segue: segue)
-        }
+        // if segue.identifier == "ShowSomewhereScene" {
+        //     passDataToSomewhereScene(segue: segue)
+        // }
     }
     
     func passDataToSomewhereScene(segue: UIStoryboardSegue) {
