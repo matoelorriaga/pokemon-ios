@@ -28,19 +28,36 @@ class DetailsWorkerTests: XCTestCase {
     // setup
     
     func setupDetailsWorker() {
-//        sut = DetailsWorker()
+        sut = DetailsWorker(detailsStore: DetailsStoreSpy())
     }
     
     // test doubles
     
+    class DetailsStoreSpy: DetailsStore {
+        
+        var getPokemonDetailsCalled = false
+        var id: Int!
+        
+        func getPokemonDetails(id: Int, completionHandler: @escaping (Pokemon?) -> Void) {
+            getPokemonDetailsCalled = true
+            self.id = id
+            completionHandler(nil)
+        }
+        
+    }
+    
     // tests
     
-    func testSomething() {
+    func testShouldCallStore() {
         // given
+        let detailsStoreSpy = DetailsStoreSpy()
+        sut.detailsStore = detailsStoreSpy
         
         // when
+        sut.getPokemonDetails(id: 25) { _ in }
         
         // then
+        XCTAssert(detailsStoreSpy.getPokemonDetailsCalled)
     }
     
 }
