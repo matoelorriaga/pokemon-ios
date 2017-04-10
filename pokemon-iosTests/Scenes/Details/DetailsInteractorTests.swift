@@ -33,7 +33,7 @@ class DetailsInteractorTests: XCTestCase {
     
     // test doubles
     
-    class DetailsStoreProtocolSpy: DetailsStoreProtocol {
+    class DetailsStoreSpy: DetailsStore {
         
         var getPokemonDetailsCalled = false
         
@@ -71,7 +71,7 @@ class DetailsInteractorTests: XCTestCase {
     
     func testShouldCallWorkerAndPresenter() {
         // given
-        let detailsWorkerSpy = DetailsWorkerSpy(detailsStore: DetailsStoreProtocolSpy())
+        let detailsWorkerSpy = DetailsWorkerSpy(detailsStore: DetailsStoreSpy())
         sut.worker = detailsWorkerSpy
         let detailsInteractorOutputSpy = DetailsInteractorOutputSpy()
         sut.output = detailsInteractorOutputSpy

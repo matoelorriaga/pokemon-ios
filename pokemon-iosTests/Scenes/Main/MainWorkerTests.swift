@@ -28,12 +28,12 @@ class MainWorkerTests: XCTestCase {
     // setup
     
     func setupMainWorker() {
-        sut = MainWorker(mainStore: MainStoreProtocolSpy())
+        sut = MainWorker(mainStore: MainStoreSpy())
     }
     
     // test doubles
     
-    class MainStoreProtocolSpy: MainStoreProtocol {
+    class MainStoreSpy: MainStore {
         
         var getPokemonListCalled = false
         
@@ -48,14 +48,14 @@ class MainWorkerTests: XCTestCase {
     
     func testShouldCallStore() {
         // given
-        let mainStoreProtocolSpy = MainStoreProtocolSpy()
-        sut.mainStore = mainStoreProtocolSpy
+        let mainStoreSpy = MainStoreSpy()
+        sut.mainStore = mainStoreSpy
         
         // when
         sut.getPokemonList { _ in }
 
         // then
-        XCTAssert(mainStoreProtocolSpy.getPokemonListCalled)
+        XCTAssert(mainStoreSpy.getPokemonListCalled)
     }
     
 }

@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 import AlamofireObjectMapper
 
-class MainAPIStore: MainStoreProtocol {
+class MainAPIStore: MainStore {
     
     func getPokemonList(completionHandler: @escaping (APIResourceList?) -> Void) {
         let url = "http://pokeapi.co/api/v2/pokemon/"

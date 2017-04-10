@@ -13,15 +13,15 @@ import Foundation
 import Alamofire
 import AlamofireObjectMapper
 
-protocol DetailsStoreProtocol {
+protocol DetailsStore {
     func getPokemonDetails(id: Int, completionHandler: @escaping (Pokemon?) -> Void)
 }
 
 class DetailsWorker {
     
-    var detailsStore: DetailsStoreProtocol
+    var detailsStore: DetailsStore
     
-    init(detailsStore: DetailsStoreProtocol) {
+    init(detailsStore: DetailsStore) {
         self.detailsStore = detailsStore
     }
     

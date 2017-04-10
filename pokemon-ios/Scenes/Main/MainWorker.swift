@@ -11,15 +11,15 @@
 
 import Foundation
 
-protocol MainStoreProtocol {
+protocol MainStore {
     func getPokemonList(completionHandler: @escaping (APIResourceList?) -> Void)
 }
 
 class MainWorker {
     
-    var mainStore: MainStoreProtocol
+    var mainStore: MainStore
     
-    init(mainStore: MainStoreProtocol) {
+    init(mainStore: MainStore) {
         self.mainStore = mainStore
     }
     

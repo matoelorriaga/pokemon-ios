@@ -33,7 +33,7 @@ class MainInteractorTests: XCTestCase {
     
     // test doubles
     
-    class MainStoreProtocolSpy: MainStoreProtocol {
+    class MainStoreSpy: MainStore {
         
         var getPokemonListCalled = false
         
@@ -71,7 +71,7 @@ class MainInteractorTests: XCTestCase {
     
     func testShouldCallWorkerAndPresenter() {
         // given
-        let mainWorkerSpy = MainWorkerSpy(mainStore: MainStoreProtocolSpy())
+        let mainWorkerSpy = MainWorkerSpy(mainStore: MainStoreSpy())
         sut.worker = mainWorkerSpy
         
         let mainInteractorOutputSpy = MainInteractorOutputSpy()
