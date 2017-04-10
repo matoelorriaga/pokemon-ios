@@ -36,11 +36,11 @@ class MainPresenterTests: XCTestCase {
     class MainPresenterOutputSpy: MainPresenterOutput {
         
         var displayGetPokemonListCalled = false
-        var mainGetPokemonListViewModel: Main.GetPokemonList.ViewModel!
+        var viewModel: Main.GetPokemonList.ViewModel!
         
         func displayGetPokemonList(viewModel: Main.GetPokemonList.ViewModel) {
             displayGetPokemonListCalled = true
-            mainGetPokemonListViewModel = viewModel
+            self.viewModel = viewModel
         }
     
     }
@@ -88,7 +88,7 @@ class MainPresenterTests: XCTestCase {
         sut.presentGetPokemonList(response: response)
         
         // then
-        let returnedPokemonList = mainPresenterOutputSpy.mainGetPokemonListViewModel.pokemonList
+        let returnedPokemonList = mainPresenterOutputSpy.viewModel.pokemonList
         let expectedPokemonList = [
             Pokemon(JSON: ["id": 1, "name": "bulbasaur"])!,
             Pokemon(JSON: ["id": 2, "name": "ivysaur"])!,

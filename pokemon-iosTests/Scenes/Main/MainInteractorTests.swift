@@ -58,9 +58,11 @@ class MainInteractorTests: XCTestCase {
     class MainInteractorOutputSpy: MainInteractorOutput {
         
         var presentGetPokemonListCalled = false
+        var response: Main.GetPokemonList.Response!
         
         func presentGetPokemonList(response: Main.GetPokemonList.Response) {
             presentGetPokemonListCalled = true
+            self.response = response
         }
         
     }

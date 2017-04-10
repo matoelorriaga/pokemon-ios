@@ -14,11 +14,7 @@ import XCTest
 
 class DetailsInteractorTests: XCTestCase {
     
-    // MARK: - Subject under test
-    
     var sut: DetailsInteractor!
-    
-    // MARK: - Test lifecycle
     
     override func setUp() {
         super.setUp()
@@ -29,22 +25,64 @@ class DetailsInteractorTests: XCTestCase {
         super.tearDown()
     }
     
-    // MARK: - Test setup
+    // setup
     
     func setupDetailsInteractor() {
         sut = DetailsInteractor()
     }
     
-    // MARK: - Test doubles
+    // test doubles
     
-    // MARK: - Tests
+    class DetailsStoreProtocolSpy: DetailsStoreProtocol {
+        
+        var getPokemonDetailsCalled = false
+        
+        func getPokemonDetails(id: Int, completionHandler: @escaping (Pokemon?) -> Void) {
+            getPokemonDetailsCalled = true
+            completionHandler(nil)
+        }
+        
+    }
     
-    func testSomething() {
-        // Given
+    class DetailsWorkerSpy: DetailsWorker {
         
-        // When
+        var getPokemonDetailsCalled = false
         
-        // Then
+        override func getPokemonDetails(id: Int, completionHandler: @escaping (Pokemon?) -> Void) {
+            getPokemonDetailsCalled = true
+            completionHandler(nil)
+        }
+        
+    }
+    
+    class DetailsInteractorOutputSpy: DetailsInteractorOutput {
+        
+        var presentGetPokemonDetailsCalled = false
+        var response: Details.GetPokemonDetails.Response!
+        
+        func presentGetPokemonDetails(response: Details.GetPokemonDetails.Response) {
+            presentGetPokemonDetailsCalled = true
+            self.response = response
+        }
+        
+    }
+    
+    // tests
+    
+    func testShouldCallWorkerAndPresenter() {
+        // given
+        let detailsWorkerSpy = DetailsWorkerSpy(detailsStore: DetailsStoreProtocolSpy())
+        sut.worker = detailsWorkerSpy
+        let detailsInteractorOutputSpy = DetailsInteractorOutputSpy()
+        sut.output = detailsInteractorOutputSpy
+        
+        // when
+        let request = Details.GetPokemonDetails.Request(id: 25)
+        sut.doGetPokemonDetails(request: request)
+        
+        // then
+        XCTAssert(detailsWorkerSpy.getPokemonDetailsCalled)
+        XCTAssert(detailsInteractorOutputSpy.presentGetPokemonDetailsCalled)
     }
     
 }

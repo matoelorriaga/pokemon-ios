@@ -14,11 +14,7 @@ import XCTest
 
 class DetailsWorkerTests: XCTestCase {
     
-    // MARK: - Subject under test
-    
     var sut: DetailsWorker!
-    
-    // MARK: - Test lifecycle
     
     override func setUp() {
         super.setUp()
@@ -29,22 +25,22 @@ class DetailsWorkerTests: XCTestCase {
         super.tearDown()
     }
     
-    // MARK: - Test setup
+    // setup
     
     func setupDetailsWorker() {
 //        sut = DetailsWorker()
     }
     
-    // MARK: - Test doubles
+    // test doubles
     
-    // MARK: - Tests
+    // tests
     
     func testSomething() {
-        // Given
+        // given
         
-        // When
+        // when
         
-        // Then
+        // then
     }
     
 }

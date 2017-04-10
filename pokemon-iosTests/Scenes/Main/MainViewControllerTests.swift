@@ -46,9 +46,11 @@ class MainViewControllerTests: XCTestCase {
     class MainViewControllerOutputSpy: MainViewControllerOutput {
         
         var doGetPokemonListCalled = false
+        var request: Main.GetPokemonList.Request!
         
         func doGetPokemonList(request: Main.GetPokemonList.Request) {
             doGetPokemonListCalled = true
+            self.request = request
         }
     
     }
