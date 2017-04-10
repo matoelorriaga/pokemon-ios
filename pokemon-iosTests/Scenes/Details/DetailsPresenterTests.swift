@@ -33,14 +33,31 @@ class DetailsPresenterTests: XCTestCase {
     
     // test doubles
     
+    class DetailsPresenterOutputSpy: DetailsPresenterOutput {
+        
+        var displayGetPokemonDetailsCalled = false
+        var viewModel: Details.GetPokemonDetails.ViewModel!
+    
+        func displayGetPokemonDetails(viewModel: Details.GetPokemonDetails.ViewModel) {
+            displayGetPokemonDetailsCalled = true
+            self.viewModel = viewModel
+        }
+    
+    }
+    
     // tests
     
-    func testSomething() {
+    func testShouldCallPresenter() {
         // given
+        let detailsPresenterOutputSpy = DetailsPresenterOutputSpy()
+        sut.output = detailsPresenterOutputSpy
         
         // when
+        let response = Details.GetPokemonDetails.Response()
+        sut.presentGetPokemonDetails(response: response)
         
         // then
+        XCTAssert(detailsPresenterOutputSpy.displayGetPokemonDetailsCalled)
     }
     
 }

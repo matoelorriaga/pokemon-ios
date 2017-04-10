@@ -53,7 +53,7 @@ class MainPresenterTests: XCTestCase {
         sut.output = mainPresenterOutputSpy
         
         // when
-        let response = Main.GetPokemonList.Response(apiResourceList: nil)
+        let response = Main.GetPokemonList.Response()
         sut.presentGetPokemonList(response: response)
         
         // then
